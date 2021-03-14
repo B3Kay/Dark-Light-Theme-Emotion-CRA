@@ -2,7 +2,6 @@ import { Theme, ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import "./App.css";
-import logo from "./logo.svg";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
@@ -10,6 +9,7 @@ const lightTheme: Theme = {
   type: "light",
   color: {
     primary: "#FBBF24",
+    contrast: "#8B5CF6",
     text: "#1F2937",
     contrastText: "#F3F4F6",
     secondary: "#F9A8D4",
@@ -21,6 +21,7 @@ const darkTheme: Theme = {
   type: "dark",
   color: {
     primary: "#8B5CF6",
+    contrast: "#FBBF24",
     text: "#F3F4F6",
     contrastText: "#1F2937",
     secondary: "#6EE7B7",
@@ -33,12 +34,15 @@ const StyledDiv = styled.div`
   color: ${({ theme }) => theme.color.primary};
 `;
 
-const Primary = styled.span`
-  color: ${({ theme }) => theme.color.primary};
+const ContrastHighlight = styled.span`
+  color: ${({ theme }) => theme.color.contrast};
+  font-weight: bold;
 `;
 const StyledButton = styled.button`
   background: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.contrastText};
+  font-weight: bold;
+  font-size: 2rem;
 `;
 const StyledMoon = styled(Moon)`
   color: ${({ theme }) => theme.color.primary};
@@ -77,11 +81,14 @@ function App() {
 
           <Paragraph>
             Click the button to switch to{" "}
-            <Primary>{theme.type === "light" ? "light" : "dark"}</Primary> mode!
+            <ContrastHighlight>
+              {theme.type === "light" ? "dark" : "light"}
+            </ContrastHighlight>{" "}
+            mode!
           </Paragraph>
 
           <StyledButton onClick={onChangeTheme}>Switch theme</StyledButton>
-          <StyledDiv>{theme.type} theme</StyledDiv>
+          {/* <StyledDiv>{theme.type} theme</StyledDiv> */}
         </header>
       </StyledBackground>
     </ThemeProvider>

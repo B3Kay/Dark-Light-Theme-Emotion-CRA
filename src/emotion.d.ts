@@ -7,6 +7,7 @@ declare module "@emotion/react" {
     type: lightOrDark;
     color: {
       primary: string;
+      contrast: string;
       text: string;
       contrastText: string;
       secondary: string;
