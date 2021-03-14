@@ -2,6 +2,7 @@ import { Theme, ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import "./App.css";
+import { getQuote } from "./components/Quotes";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
@@ -13,7 +14,7 @@ const lightTheme: Theme = {
     text: "#1F2937",
     contrastText: "#F3F4F6",
     secondary: "#F9A8D4",
-    elevated: "#D1D5DB",
+    secondaryText: "#a7adb7",
     background: "#F3F4F6",
   },
 };
@@ -25,19 +26,11 @@ const darkTheme: Theme = {
     text: "#F3F4F6",
     contrastText: "#1F2937",
     secondary: "#6EE7B7",
-    elevated: "#6B7280",
+    secondaryText: "#6B7280",
     background: "#1F2937",
   },
 };
 
-const StyledDiv = styled.div`
-  color: ${({ theme }) => theme.color.primary};
-`;
-
-const ContrastHighlight = styled.span`
-  color: ${({ theme }) => theme.color.contrast};
-  font-weight: bold;
-`;
 const StyledButton = styled.button`
   background: ${({ theme }) => theme.color.primary};
   color: ${({ theme }) => theme.color.contrastText};
@@ -57,8 +50,20 @@ const StyledBackground = styled.div`
   `};
 `;
 
-const Paragraph = styled.p`
+const Quote = styled.p`
   color: ${({ theme }) => theme.color.text};
+  font-style: italic;
+  width: 50%;
+  margin-right: 3rem;
+  margin-left: 3rem;
+  margin-bottom: 0.5rem;
+`;
+
+const Author = styled.p`
+  color: ${({ theme }) => theme.color.secondaryText};
+  font-size: 1rem;
+  margin-top: 0px;
+  margin-bottom: 3rem;
 `;
 
 function App() {
@@ -68,6 +73,8 @@ function App() {
     const newTheme = theme.type === "light" ? darkTheme : lightTheme;
     setTheme(newTheme);
   };
+
+  const quote = getQuote(theme.type);
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,16 +86,12 @@ function App() {
             <StyledMoon className="App-logo" />
           )}
 
-          <Paragraph>
-            Click the button to switch to{" "}
-            <ContrastHighlight>
-              {theme.type === "light" ? "dark" : "light"}
-            </ContrastHighlight>{" "}
-            mode!
-          </Paragraph>
+          <Quote>"{quote.quote}"</Quote>
+          <Author>{quote.author}</Author>
 
-          <StyledButton onClick={onChangeTheme}>Switch theme</StyledButton>
-          {/* <StyledDiv>{theme.type} theme</StyledDiv> */}
+          <StyledButton onClick={onChangeTheme}>
+            Switch to {theme.type === "light" ? "dark" : "light"}
+          </StyledButton>
         </header>
       </StyledBackground>
     </ThemeProvider>

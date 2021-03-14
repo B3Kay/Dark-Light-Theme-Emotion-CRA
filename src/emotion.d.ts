@@ -11,7 +11,7 @@ declare module "@emotion/react" {
       text: string;
       contrastText: string;
       secondary: string;
-      elevated: string;
+      secondaryText: string;
       background: string;
     };
   }
