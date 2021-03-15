@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import { lightOrDark } from "../emotion";
 
 type Quote = {
@@ -77,3 +78,20 @@ export const getQuote = (type: lightOrDark): Quote => {
   const quote = getRandomQuote(quotes);
   return quote;
 };
+
+export const QuoteComponent = styled.p`
+  color: ${({ theme }) => theme.color.text};
+  font-style: italic;
+  width: 50%;
+  height: 10rem;
+  margin-right: 3rem;
+  margin-left: 3rem;
+  margin-bottom: 0.5rem;
+`;
+
+export const AuthorComponent = styled.p`
+  color: ${({ theme }) => theme.color.secondaryText};
+  font-size: 1rem;
+  margin-top: 0px;
+  margin-bottom: 3rem;
+`;
