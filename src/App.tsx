@@ -54,6 +54,7 @@ const Quote = styled.p`
   color: ${({ theme }) => theme.color.text};
   font-style: italic;
   width: 50%;
+  height: 10rem;
   margin-right: 3rem;
   margin-left: 3rem;
   margin-bottom: 0.5rem;
@@ -86,12 +87,12 @@ function App() {
             <StyledMoon className="App-logo" />
           )}
 
-          <Quote>"{quote.quote}"</Quote>
-          <Author>{quote.author}</Author>
-
           <StyledButton onClick={onChangeTheme}>
             Switch to {theme.type === "light" ? "dark" : "light"}
           </StyledButton>
+
+          <Quote>"{quote.quote}"</Quote>
+          <Author>{quote.author}</Author>
         </header>
       </StyledBackground>
     </ThemeProvider>
