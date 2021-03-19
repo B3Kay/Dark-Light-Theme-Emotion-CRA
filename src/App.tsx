@@ -2,6 +2,7 @@ import { Theme, ThemeProvider } from "@emotion/react";
 import styled from "@emotion/styled";
 import React, { useState } from "react";
 import "./App.css";
+import { AuthorComponent, getQuote, QuoteComponent } from "./components/Quotes";
 import { ReactComponent as Moon } from "./moon.svg";
 import { ReactComponent as Sun } from "./sun.svg";
 
@@ -66,6 +67,7 @@ function App() {
     const newTheme = theme.type === "light" ? darkTheme : lightTheme;
     setTheme(newTheme);
   };
+  const quote = getQuote(theme.type);
 
   return (
     <ThemeProvider theme={theme}>
@@ -86,6 +88,9 @@ function App() {
           </Paragraph>
 
           <StyledButton onClick={onChangeTheme}>Switch theme</StyledButton>
+
+          <QuoteComponent>{quote.quote}</QuoteComponent>
+          <AuthorComponent>{quote.author}</AuthorComponent>
         </header>
       </StyledBackground>
     </ThemeProvider>
